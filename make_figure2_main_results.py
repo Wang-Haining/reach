@@ -272,7 +272,7 @@ ax.text(XS0 - 0.042, SY + 0.013, "narrower-scope\nreached more", ha="right", va=
 ax.text(XS0 - 0.042, SY - 0.013, "broader-scope\nreached more", ha="right", va="center", fontsize=4.8, color=BLUE)
 n_lower = sum(1 for m in NAMED if row_cross["narrow"][m] < row_cross["broad"][m])
 ax.text(XS1 + 0.03, SY - 0.002, f"{n_lower} of 31 named areas below zero", ha="left", va="top", fontsize=4.8, color="#333333")
-ax.text(XS1 + 0.03, SY + 0.002, "bar colour = research area", ha="left", va="bottom", fontsize=4.8, color="#333333")
+ax.text(XS1 + 0.03, SY + 0.002, "bar color = research area", ha="left", va="bottom", fontsize=4.8, color="#333333")
 
 # ------------------------------------------------------------- bottom band ----
 NB_Y = 0.237

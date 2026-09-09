@@ -37,7 +37,7 @@ labels = {int(r["qwen_macro"]): r["display_label"] for r in read("SourceData_Hie
 labels[18] = "Mixed records"
 assert len(enrich) == 17 and len(edges) == 1024 and len(nodes) == 32 and len(lodo) == 96 and len(metrics) == 3
 
-fig = plt.figure(figsize=(7.2, 6.0))
+fig = plt.figure(figsize=(7.0, 5.8))
 gs = fig.add_gridspec(2, 2, width_ratios=[1.05, 1], height_ratios=[1.35, 0.85], wspace=0.30, hspace=0.38,
                       left=0.08, right=0.93, top=0.93, bottom=0.08)
 ax_a = fig.add_subplot(gs[0, 0]); ax_b = fig.add_subplot(gs[0, 1]); ax_c = fig.add_subplot(gs[1, :])

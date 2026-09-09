@@ -49,7 +49,7 @@ NAVY, RED, PALE = "#08306B", "#7F0000", "#F7F5F2"
 CMAP = LinearSegmentedColormap.from_list("red_navy", [RED, "#C9553D", PALE, "#4A7BB7", NAVY])
 POOLED = -0.0824527
 
-fig = plt.figure(figsize=(7.2, 5.0))
+fig = plt.figure(figsize=(7.0, 4.9))
 ax_heat = fig.add_axes([0.235, 0.20, 0.30, 0.74])
 ax_key = fig.add_axes([0.03, 0.03, 0.52, 0.13])
 ax_fun = fig.add_axes([0.63, 0.12, 0.355, 0.82])

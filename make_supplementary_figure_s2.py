@@ -55,7 +55,7 @@ def label(cov):
     return cov
 
 
-fig, (ax_a, ax_b) = plt.subplots(1, 2, figsize=(7.2, 3.3), gridspec_kw={"width_ratios": [1, 1.1], "wspace": 1.15})
+fig, (ax_a, ax_b) = plt.subplots(1, 2, figsize=(7.0, 3.2), gridspec_kw={"width_ratios": [1, 1.1], "wspace": 1.15})
 
 # a: propensity overlap within support
 for arm, color, lab in (("Broader scope", BLUE, "Broader-scope journals"), ("Narrower scope", RED, "Narrower-scope journals")):

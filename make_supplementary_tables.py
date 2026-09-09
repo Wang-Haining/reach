@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supplementary Tables S1-S3 as LaTeX (booktabs), generated from Source Data.
+"""Supplementary Tables S1-S3 as LaTeX (booktabs), generated from source_data/.
 
 S1  characteristics of the two journal groups in the primary comparison sample, before and after weighting
 S2  propensity-model candidates: support, effective sample size, balance, weights
@@ -106,7 +106,7 @@ lines = [
     "standardized mean difference, narrower minus broader, on the scale used in the propensity model",
     "(heavy-tailed counts entered as $\\log(1+x)$); means are shown on the natural scale. All variables",
     "were recorded no later than publication. The 32 SPECTER2 and 32 Qwen3 title-content components,",
-    "the 1,000 topic-group indicators, and the remaining lead-country indicators are in the Source Data.}",
+    "the 1,000 topic-group indicators, and the remaining lead-country indicators are in the data repository.}",
     "\\label{tab:characteristics}",
     "\\scriptsize",
     "\\renewcommand{\\arraystretch}{0.92}",

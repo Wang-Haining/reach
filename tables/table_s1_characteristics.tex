@@ -1,0 +1,66 @@
+\begin{table}[H]
+\centering
+\caption{\textbf{Characteristics of papers in the two journal groups, before and after weighting.}
+Primary comparison sample of 3,818,173 papers from 20,203 journals. Unweighted columns describe the
+papers as published; weighted columns apply the inverse-probability weights of the selected 63-leaf
+propensity model (effective sample sizes 671,512 broader-scope and 1,040,789 narrower-scope). SMD,
+standardized mean difference, narrower minus broader, on the scale used in the propensity model
+(heavy-tailed counts entered as $\log(1+x)$); means are shown on the natural scale. All variables
+were recorded no later than publication. The 32 SPECTER2 and 32 Qwen3 title-content components,
+the 1,000 topic-group indicators, and the remaining lead-country indicators are in the Source Data.}
+\label{tab:characteristics}
+\scriptsize
+\renewcommand{\arraystretch}{0.92}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+ & \multicolumn{3}{c}{Unweighted} & \multicolumn{3}{c}{Weighted} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+ & Broader & Narrower & SMD & Broader & Narrower & SMD \\
+\midrule
+\addlinespace[3pt]\emph{Paper} & & & & & & \\
+\quad References, count & 23.4 & 25.3 & +0.035 & 25.5 & 23.5 & -0.093 \\
+\quad Distinct OpenAlex fields among references, count & 2.84 & 2.82 & -0.006 & 2.94 & 2.70 & -0.094 \\
+\quad Reference-field entropy & 0.55 & 0.52 & -0.050 & 0.56 & 0.51 & -0.096 \\
+\quad Authors, count & 4.64 & 4.65 & +0.000 & 5.03 & 4.56 & -0.018 \\
+\quad Countries, count & 1.03 & 1.08 & +0.058 & 1.10 & 1.04 & -0.059 \\
+\quad Institutions, count & 1.86 & 2.07 & +0.069 & 2.07 & 1.96 & -0.034 \\
+\quad International collaboration, \% & 17.0 & 19.8 & +0.071 & 19.2 & 18.5 & -0.018 \\
+\addlinespace[3pt]\emph{Authors, history through $t-1$} & & & & & & \\
+\quad Prior works per author, mean & 59.1 & 71.1 & +0.090 & 65.5 & 66.0 & -0.089 \\
+\quad Prior works per author, maximum & 147 & 185 & +0.093 & 169 & 171 & -0.083 \\
+\quad Prior citations per author, mean & 1,992 & 2,525 & +0.112 & 2,432 & 2,307 & -0.098 \\
+\quad Prior citations per author, maximum & 6,041 & 8,111 & +0.110 & 7,589 & 7,332 & -0.093 \\
+\quad First- and last-author prior venue scope & 0.856 & 0.863 & +0.639 & 0.858 & 0.860 & +0.180 \\
+\quad First- and last-author prior content breadth & 0.127 & 0.123 & -0.160 & 0.126 & 0.124 & -0.057 \\
+\quad Author history unavailable, \% & 18.4 & 17.9 & -0.012 & 15.9 & 20.0 & +0.105 \\
+\addlinespace[3pt]\emph{Institutions, history through $t-1$} & & & & & & \\
+\quad Prior works per institution, mean & 14,600 & 16,735 & +0.058 & 16,920 & 15,351 & -0.115 \\
+\quad Prior works per institution, maximum & 27,437 & 32,763 & +0.066 & 32,406 & 29,866 & -0.112 \\
+\quad Prior citations per institution, mean & 578,000 & 697,435 & +0.069 & 698,783 & 623,438 & -0.116 \\
+\quad Prior citations per institution, maximum & 1,137,801 & 1,422,314 & +0.075 & 1,394,188 & 1,269,692 & -0.114 \\
+\addlinespace[3pt]\emph{Publishing journal, $t-3$ through $t-1$} & & & & & & \\
+\quad Articles published, count & 2,214 & 2,757 & +0.019 & 2,530 & 3,182 & +0.060 \\
+\quad Prior prestige, mean citations per article & 2.04 & 2.18 & +0.166 & 2.34 & 1.93 & -0.135 \\
+\quad Open-access share, \% & 55.4 & 42.1 & -0.334 & 46.9 & 49.2 & +0.057 \\
+\quad English-language share, \% & 98.6 & 98.8 & +0.041 & 98.5 & 98.6 & +0.006 \\
+\quad Share of comparison set in narrower-scope journals & 0.536 & 0.570 & +0.244 & 0.550 & 0.565 & +0.109 \\
+\addlinespace[3pt]\emph{Publication year, \%} & & & & & & \\
+\quad 2015 & 15.6 & 15.2 & -0.013 & 16.2 & 15.1 & -0.031 \\
+\quad 2016 & 15.7 & 15.5 & -0.005 & 15.9 & 16.5 & +0.015 \\
+\quad 2017 & 16.1 & 15.9 & -0.006 & 15.7 & 15.7 & +0.001 \\
+\quad 2018 & 16.6 & 16.8 & +0.004 & 16.3 & 16.6 & +0.008 \\
+\quad 2019 & 16.8 & 18.3 & +0.039 & 16.9 & 17.8 & +0.025 \\
+\quad 2020 & 19.2 & 18.4 & -0.019 & 19.0 & 18.3 & -0.017 \\
+\addlinespace[3pt]\emph{Lead-author country, \%} & & & & & & \\
+\quad United States & 13.0 & 15.7 & +0.077 & 16.5 & 13.3 & -0.091 \\
+\quad China & 12.4 & 12.5 & +0.006 & 12.8 & 13.4 & +0.017 \\
+\quad India & 5.7 & 4.2 & -0.068 & 4.9 & 4.8 & -0.005 \\
+\quad Japan & 4.3 & 4.0 & -0.019 & 4.5 & 4.2 & -0.015 \\
+\quad United Kingdom & 3.0 & 3.9 & +0.052 & 3.9 & 3.2 & -0.034 \\
+\quad Russia & 3.4 & 2.2 & -0.069 & 2.6 & 2.6 & +0.001 \\
+\quad Germany & 2.1 & 2.8 & +0.043 & 2.5 & 2.6 & +0.001 \\
+\quad Not recorded & 21.4 & 20.8 & -0.015 & 18.0 & 22.5 & +0.112 \\
+\bottomrule
+\end{tabular}
+\end{table}

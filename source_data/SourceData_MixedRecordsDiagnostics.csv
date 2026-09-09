@@ -1,0 +1,18 @@
+diagnostic,group,value,unit,source
+title_audit_sample,all,200,titles,fixed hash-ordered sample from deterministic comparison population
+explicit_record_type_signal,all,83,titles,transparent title-phrase audit
+deterministic_comparison_population,all,3827491,papers,qss_v3/routing_scores.parquet
+mixed_cluster_population,all,152090,papers,qss_v3/routing_scores.parquet
+mixed_cluster_share,all,0.039736213618791,proportion,qss_v3/routing_scores.parquet
+mixed_cluster_share,broader,0.0458875028241819,proportion,qss_v3/routing_scores.parquet
+mixed_cluster_share,narrower,0.0356136719077275,proportion,qss_v3/routing_scores.parquet
+deterministic_theta,all_clusters,-0.0824527034864642,log ratio-of-ratios,qss_v3/routing_scores.parquet
+deterministic_theta,mixed_cluster_masked,-0.0841266175603677,log ratio-of-ratios,qss_v3/routing_scores.parquet
+mixed_destination_ipw_share,broader,0.00342394514062369,proportion,SourceData_ED3_network_edges.csv
+mixed_destination_ipw_share,narrower,0.00298414352292054,proportion,SourceData_ED3_network_edges.csv
+directed_modularity_contrast,all_sources,0.028791822887511,absolute difference,SourceData_Figure3_metrics.csv
+directed_modularity_contrast,mixed_source_omitted,0.0309916623706492,absolute difference,SourceData_ED3_lodo.csv
+audience_participation_contrast,all_sources,-0.034112688779734,absolute difference,SourceData_Figure3_metrics.csv
+audience_participation_contrast,mixed_source_omitted,-0.0347732452921529,absolute difference,SourceData_ED3_lodo.csv
+semantic_span_contrast,all_sources,-0.009242410359209,absolute difference,SourceData_Figure3_metrics.csv
+semantic_span_contrast,mixed_source_omitted,-0.0093791390517291,absolute difference,SourceData_ED3_lodo.csv

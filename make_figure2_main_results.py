@@ -105,7 +105,7 @@ for m in order[:16]:
 
 ax.text(0.008, 0.992, "a", fontsize=10, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
 ax.text(0.03, 0.985, "The same manuscripts…", fontsize=9, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
-ax.text(0.03, 0.964, "7.62 million eligible articles, 2015–2020, on a title-content map (UMAP of a 16% sample).\n"
+ax.text(0.03, 0.964, "7.62 million eligible articles, 2015–2020, on a title-content map.\n"
         "3.83 million compared papers colored by research area; 3.79 million outside common support in gray.",
         fontsize=5.6, ha="left", va="top", color="#555555", zorder=10)
 

@@ -58,11 +58,11 @@ def label(cov):
 fig, (ax_a, ax_b) = plt.subplots(1, 2, figsize=(7.2, 3.3), gridspec_kw={"width_ratios": [1, 1.1], "wspace": 1.15})
 
 # a: propensity overlap within support
-for arm, color in (("Broader scope", BLUE), ("Narrower scope", RED)):
+for arm, color, lab in (("Broader scope", BLUE, "Broader-scope journals"), ("Narrower scope", RED, "Narrower-scope journals")):
     rows = sorted((r for r in bins if r["arm"] == arm), key=lambda r: float(r["bin_left"]))
     x = np.array([float(r["bin_left"]) for r in rows] + [float(rows[-1]["bin_right"])])
     d = np.array([float(r["density"]) for r in rows])
-    ax_a.stairs(d, x, color=color, lw=1.0, label=arm)
+    ax_a.stairs(d, x, color=color, lw=1.0, label=lab)
 ax_a.axvspan(0, 0.05, color="#EEEEEE", lw=0); ax_a.axvspan(0.95, 1, color="#EEEEEE", lw=0)
 ax_a.set_xlim(0, 1); ax_a.set_xlabel("Estimated probability of narrower-scope publication")
 ax_a.set_ylabel("Density"); ax_a.legend(frameon=False, loc="upper center", fontsize=6.5)

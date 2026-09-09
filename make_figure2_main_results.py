@@ -225,7 +225,7 @@ for m in order[:10]:
             path_effects=[pe.withStroke(linewidth=1.4, foreground="white", alpha=0.9)])
 
 ax.text(0.008, GY1 + 0.010, "c", fontsize=10, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
-ax.text(0.03, GY1 + 0.002, "Where the two journal types sent\nthe same citations differently", ha="left", va="top",
+ax.text(0.03, GY1 + 0.002, "Where the two journal types carried\nthe same citations differently", ha="left", va="top",
         fontsize=7, fontweight="bold", color=INK, zorder=10, linespacing=1.25,
         path_effects=[pe.withStroke(linewidth=2.5, foreground="white")])
 n_ring_red = sum(1 for m in NAMED if diff[(m, m)] > 0)
@@ -252,11 +252,17 @@ ax.text(0.5, SY + 0.028, "Area by area: share of citations from other research a
 order_x = sorted(NAMED, key=lambda m: area_xy[m][0])
 dmax = max(abs(row_cross["narrow"][m] - row_cross["broad"][m]) for m in NAMED)
 XS0, XS1 = 0.15, 0.82
+label_bars = set(sorted(NAMED, key=lambda m: -abs(row_cross["narrow"][m] - row_cross["broad"][m]))[:4])
+label_tier = [1, 0, 1, 0]   # alternate heights so adjacent labels do not collide
 for i, m in enumerate(order_x):
     d = row_cross["narrow"][m] - row_cross["broad"][m]
     x = XS0 + i * ((XS1 - XS0) / (len(order_x) - 1))
     h = 0.024 * d / dmax
     ax.add_patch(plt.Rectangle((x - 0.010, SY), 0.020, h, fc=AREA_COLORS[m], ec="none", alpha=0.95))
+    if m in label_bars:
+        tier = label_tier.pop(0)
+        ax.text(x, SY + 0.003 + 0.009 * tier, labels[m], fontsize=4.0, ha="center", va="bottom",
+                color="#333333", path_effects=[pe.withStroke(linewidth=1.2, foreground="white")])
 ax.plot([XS0 - 0.02, XS1 + 0.02], [SY, SY], color="#333333", lw=0.5)
 ax.annotate("", xy=(XS0 - 0.035, SY + 0.024), xytext=(XS0 - 0.035, SY + 0.002),
             arrowprops=dict(arrowstyle="-|>", color=RED, lw=0.7, mutation_scale=6))

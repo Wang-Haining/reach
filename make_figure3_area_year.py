@@ -46,7 +46,7 @@ for r in named:
 
 from matplotlib.colors import LinearSegmentedColormap
 NAVY, RED, PALE = "#08306B", "#7F0000", "#F7F5F2"
-CMAP = LinearSegmentedColormap.from_list("navy_red", [NAVY, "#4A7BB7", PALE, "#C9553D", RED])
+CMAP = LinearSegmentedColormap.from_list("red_navy", [RED, "#C9553D", PALE, "#4A7BB7", NAVY])
 POOLED = -0.0824527
 
 fig = plt.figure(figsize=(7.2, 5.0))
@@ -77,7 +77,7 @@ ax.set_yticks(range(len(order))); ax.set_yticklabels([labels[m] for m in order])
 ax.tick_params(length=0, pad=2)
 for spine in ax.spines.values():
     spine.set_visible(False)
-ax.set_title("Contrast in each research area and year", loc="left", fontsize=7.5)
+ax.set_title("Negative in 117 of 158 cells; no cell positive", loc="left", fontsize=7.5)
 
 # Key strip under the heatmap: horizontal colour scale with the direction spelled out.
 ax_key.set_axis_off()
@@ -88,9 +88,9 @@ bar.solids.set_alpha(1)
 cax.tick_params(labelsize=5.5, length=2, pad=1)
 cax.set_xticklabels(["-0.4", "-0.2", "0", "0.2", "0.4"])
 ax_key.text(0.34, 0.62, "Narrower-scope journals receive\nrelatively fewer citations\nfrom other research areas",
-            ha="right", va="center", fontsize=5.5, color=NAVY, transform=ax_key.transAxes)
+            ha="right", va="center", fontsize=5.5, color=RED, transform=ax_key.transAxes)
 ax_key.text(0.66, 0.62, "Narrower-scope journals receive\nrelatively more citations\nfrom other research areas",
-            ha="left", va="center", fontsize=5.5, color=RED, transform=ax_key.transAxes)
+            ha="left", va="center", fontsize=5.5, color=NAVY, transform=ax_key.transAxes)
 ax_key.text(0.50, 0.08, "Log ratio-of-ratios, narrower minus broader. Full color with black outline: 95% CI excludes zero.\n"
             "Faded: 95% CI includes zero. Gray: fewer than 5,000 papers in a journal group or fewer than 50 journals.",
             ha="center", va="bottom", fontsize=5.5, color="#333333", transform=ax_key.transAxes)
@@ -109,7 +109,7 @@ ax.plot(POOLED + 1.96 * grid, grid, color=NAVY, lw=0.7, ls="--")
 ax.axvline(POOLED, color=NAVY, lw=0.9)
 ax.axvline(0, color="black", lw=0.6, ls=":")
 ax.scatter(est[~excl], se[~excl], s=size[~excl], facecolor="white", edgecolor=GREY, lw=0.6)
-ax.scatter(est[excl], se[excl], s=size[excl], color=NAVY, alpha=0.9, lw=0)
+ax.scatter(est[excl], se[excl], s=size[excl], color=RED, alpha=0.9, lw=0)
 outside = np.abs(est - POOLED) > 1.96 * se
 for k in np.argsort(-np.abs(est))[:3]:
     ax.annotate(f"{named[k]['display_label']}, {named[k]['publication_year']}",
@@ -124,7 +124,7 @@ ax.text(POOLED - 0.02, 0.02, "Sample-wide\ncontrast", color=NAVY, ha="right", va
 # Legend for marker meaning and size.
 from matplotlib.lines import Line2D
 handles = [
-    Line2D([], [], marker="o", ls="", markerfacecolor=NAVY, markeredgecolor=NAVY, ms=5,
+    Line2D([], [], marker="o", ls="", markerfacecolor=RED, markeredgecolor=RED, ms=5,
            label="95% CI excludes zero"),
     Line2D([], [], marker="o", ls="", markerfacecolor="white", markeredgecolor=GREY, ms=5,
            label="95% CI includes zero"),

@@ -89,7 +89,7 @@ cb = fig.colorbar(im, ax=ax_b, fraction=0.045, pad=0.03, extend="both", ticks=[-
 cb.ax.set_yticklabels([f"{v:+.2f}" for v in (-lim, -lim / 2, 0, lim / 2, lim)])
 cb.ax.tick_params(labelsize=5.5)
 cb.set_label("Standardized share, narrower minus broader (×100)", fontsize=6)
-ax_b.set_title("Same-area cells gain, cross-area cells lose", loc="left", fontsize=7.5)
+ax_b.set_title("Same-area cells gain, other-area cells lose", loc="left", fontsize=7.5)
 
 # ---------------------------------------------------------------- c: metrics + LODO
 names = {"directed_modularity": ("Within-area concentration\n(directed modularity)", 1),
@@ -106,7 +106,7 @@ for k, r in enumerate(metrics):
     axk.axvline(0, color=INK, lw=0.6)
     jitter = np.random.default_rng(3).uniform(-0.18, 0.18, len(vals))
     axk.scatter(vals, 0.55 + jitter, s=7, color=GREY, alpha=0.6, lw=0, zorder=3)
-    axk.errorbar(d, 0, xerr=[[d - dl], [dh - d]], fmt="o", color=RED, ms=4.5, capsize=2.5, lw=1.0, zorder=5)
+    axk.errorbar(d, 0, xerr=[[d - dl], [dh - d]], fmt="o", color=INK, ms=4.5, capsize=2.5, lw=1.0, zorder=5)
     axk.set_yticks([0, 0.55])
     axk.set_yticklabels(["all areas", "omitting one\narea at a time"] if k == 0 else ["", ""], fontsize=5.6)
     if k:

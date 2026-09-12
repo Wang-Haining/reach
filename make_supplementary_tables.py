@@ -182,11 +182,11 @@ refd = one(est, evidence="overall", test="primary", level="Published-reference d
 refa = one(est, evidence="overall", test="reference_adjusted")
 first, last = one(same, author_role="first"), one(same, author_role="last")
 rows = [
-    ("\\emph{Primary and computational checks}", None),
+    ("\\emph{Primary contrast and its dependence on extreme counts and the fit}", None),
     ("Primary AIPW estimate (frozen)", (float(prim["estimate"]), float(prim["ci_low"]), float(prim["ci_high"]), f"{int(prim['n']):,} papers, {int(prim['journals']):,} journals")),
     ("Citation counts capped at the 99.9th percentile", (sv("99.9% winsorized", "estimate"), sv("99.9% winsorized", "ci_low"), sv("99.9% winsorized", "ci_high"), "primary sample")),
     ("Regenerated fit (second fit of the same specification)", (sv("Deterministic rerun", "estimate"), sv("Deterministic rerun", "ci_low"), sv("Deterministic rerun", "ci_high"), "3,827,491 papers, 20,215 journals")),
-    ("\\emph{Identification boundary}", None),
+    ("\\emph{Could the contrast arise from the manuscript or its authors rather than the journal?}", None),
     ("Same contrast in the published reference lists", (float(refd["estimate"]), float(refd["ci_low"]), float(refd["ci_high"]), "primary sample")),
     ("Citation estimate after adding the reference list to the adjustment set", (float(refa["estimate"]), float(refa["ci_low"]), float(refa["ci_high"]), f"{int(refa['n']):,} papers, {int(refa['journals']):,} journals")),
     ("Same first author, both journal types in the same year and topic group", (float(first["theta"]), float(first["bootstrap_ci_low"]), float(first["bootstrap_ci_high"]), f"{int(first['strata']):,} strata, {int(first['papers']):,} papers")),

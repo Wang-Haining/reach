@@ -278,11 +278,22 @@ ax.text(XS1 + 0.03, SY + 0.002, "bar color = research area", ha="left", va="bott
 NB_Y = 0.237
 ax.text(0.008, NB_Y + 0.010, "e", fontsize=10, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
 ax.text(0.03, NB_Y, "Across all 3,818,173 compared papers", fontsize=6.8, fontweight="bold", color=INK, va="top")
-ax.text(0.03, NB_Y - 0.020, "From other research areas:  2.95 vs 2.55 citations per paper\n"
-        "From the same topic:            2.05 vs 1.96 citations per paper\n"
-        "Other-area per same-topic:   1.44 vs 1.30", fontsize=6.2, color="#333333", va="top", linespacing=1.4)
-ax.text(0.03, NB_Y - 0.092, "9.2% lower", fontsize=14, fontweight="bold", color=RED, va="top")
-ax.text(0.21, NB_Y - 0.094, "for narrower-scope journals\n(95% CI, 4.8% to 13.4% lower)", fontsize=6, color="#555555", va="top")
+# Paired bars: adjusted citations per paper by origin (broader vs narrower), read from the primary table.
+prim = {r["outcome"]: (float(r["mean_broad"]), float(r["mean_specialized"])) for r in read("SourceData_Figure2.csv") if r["analysis"] == "primary"}
+assert round(prim["far"][0], 2) == 2.95 and round(prim["far"][1], 2) == 2.55 and round(prim["near"][1], 2) == 1.96
+rows_e = [("From other research areas", prim["far"]), ("From a different topic, same area", prim["intermediate"]),
+          ("From the same topic", prim["near"])]
+bx0, bw = 0.20, 0.22 / 3.0          # bar origin and width per citation
+for k, (lab, (vb, vn)) in enumerate(rows_e):
+    y = NB_Y - 0.026 - k * 0.020
+    ax.text(bx0 - 0.008, y, lab, ha="right", va="center", fontsize=5.8, color="#333333")
+    ax.add_patch(plt.Rectangle((bx0, y + 0.0015), bw * vb, 0.0055, fc=BLUE, ec="none"))
+    ax.add_patch(plt.Rectangle((bx0, y - 0.0070), bw * vn, 0.0055, fc=RED, ec="none"))
+    ax.text(bx0 + bw * vb + 0.004, y + 0.0043, f"{vb:.2f}", va="center", fontsize=5.4, color=BLUE)
+    ax.text(bx0 + bw * vn + 0.004, y - 0.0043, f"{vn:.2f}", va="center", fontsize=5.4, color=RED)
+ax.text(bx0, NB_Y - 0.026 - 3 * 0.020 + 0.004, "adjusted citations per paper, five years", ha="left", va="top", fontsize=5.2, color="#777777")
+ax.text(0.03, NB_Y - 0.100, "9.2% lower", fontsize=14, fontweight="bold", color=RED, va="top")
+ax.text(0.21, NB_Y - 0.102, "other-area citations per same-topic citation\n(1.30 vs 1.44; 95% CI, 4.8% to 13.4% lower)", fontsize=6, color="#555555", va="top")
 
 CASE_RANK = 7   # cardiovascular corridor; rank among the eight outcome-blind corridors
 case = next(r for r in read("SourceData_Figure2_Corridors.csv") if int(r["case_rank"]) == CASE_RANK)

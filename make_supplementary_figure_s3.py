@@ -30,9 +30,9 @@ for k, r in zip(y, rows):
     ax_a.scatter(b, k, color=BLUE, s=22, zorder=3)
     ax_a.scatter(n, k, color=RED, s=22, marker="s", zorder=3)
 ax_a.set_yticks(y)
-ax_a.set_yticklabels([f"{r['display_label']}\n{r['broad_name']} vs {r['narrow_name']}" for r in rows], fontsize=6.2, linespacing=1.4)
+ax_a.set_yticklabels([f"{r['display_label']}\n{r['broad_name']}\nvs {r['narrow_name']}" for r in rows], fontsize=6.2, linespacing=1.1)
 for lab in ax_a.get_yticklabels():
-    lab.set_ha("left"); lab.set_x(-0.98)
+    lab.set_ha("right"); lab.set_x(-0.06)
 ax_a.set_xlim(0.80, 0.91)
 ax_a.set_xlabel("Journal scope score\n(mean title similarity, preceding three years)")
 ax_a.spines[["top", "right", "left"]].set_visible(False); ax_a.tick_params(axis="y", length=0)

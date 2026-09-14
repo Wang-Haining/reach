@@ -77,7 +77,7 @@ ax.set_yticks(range(len(order))); ax.set_yticklabels([labels[m] for m in order])
 ax.tick_params(length=0, pad=2)
 for spine in ax.spines.values():
     spine.set_visible(False)
-ax.set_title("Negative in 117 of 158 cells; no cell positive", loc="left", fontsize=7.5)
+ax.set_title("117/158 negative; no CI wholly above zero", loc="left", fontsize=7.5)
 
 # Key strip under the heatmap: horizontal colour scale with the direction spelled out.
 ax_key.set_axis_off()

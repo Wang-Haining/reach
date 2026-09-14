@@ -2,7 +2,7 @@
 
 Data and figure code for the manuscript *Journal scope and the reach of scientific work*.
 
-Every number printed in the manuscript and its Supplementary Information is computed from the aggregate tables in `source_data/`. Paper-level records are not redistributed; they derive from the OpenAlex snapshot of 26 June 2026 and, for one supplementary analysis, SciSciNet v2.
+This repository contains aggregate results and code for drawing the figures and generating the tables. Paper-level records and the upstream analysis pipeline are not included; the analyses use the OpenAlex snapshot of 26 June 2026 and, for one supplementary analysis, SciSciNet v2.
 
 ## Reproduction
 

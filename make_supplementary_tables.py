@@ -104,7 +104,7 @@ lines = [
     "papers as published; weighted columns apply the inverse-probability weights of the selected 63-leaf",
     "propensity model (effective sample sizes 671,512 broader-scope and 1,040,789 narrower-scope). SMD,",
     "standardized mean difference, narrower minus broader, on the scale used in the propensity model",
-    "(heavy-tailed counts entered as $\\log(1+x)$); means are shown on the natural scale. All variables",
+    "(skewed counts were log-transformed after adding one); means are shown on the natural scale. All variables",
     "were recorded no later than publication. The 32 SPECTER2 and 32 Qwen3 title-content components,",
     "the 1,000 topic-group indicators, and the remaining lead-country indicators are in the data repository.}",
     "\\label{tab:characteristics}",
@@ -174,7 +174,9 @@ def sv(item, stat):
 
 
 def fmt_ci(e, lo, hi):
-    return f"${e:.4f}$ & ${lo:.4f}$ to ${hi:.4f}$"
+    # Preserve the sign of a small nonzero interval endpoint when rounding.
+    vals = [f"{v:.4f}" if 0 < abs(v) < 0.0005 else f"{v:.3f}" for v in (e, lo, hi)]
+    return f"${vals[0]}$ & ${vals[1]}$ to ${vals[2]}$"
 
 
 prim = one(est, evidence="overall", test="primary", level="Later citation distribution")

@@ -7,6 +7,7 @@ Python 3.11 or later, `numpy`, `matplotlib` (3.10 tested). No other dependency. 
 ```
 python make_figure2_main_results.py
 python make_figure3_area_year.py
+python make_figure_area_year_summary.py
 python make_figure4_network.py
 python make_supplementary_figure_s1.py
 python make_supplementary_figure_s2.py
@@ -14,17 +15,18 @@ python make_supplementary_figure_s3.py
 python make_supplementary_tables.py
 ```
 
-Figure 1 (study design) is drawn by hand and has no script. Filenames retain earlier numbering: `make_figure4_network.py` produces manuscript Figure 3, and `make_figure3_area_year.py` produces manuscript Figure 4.
+Figure 1 (study design) is drawn by hand and has no script. Filenames retain earlier numbering: `make_figure4_network.py` produces manuscript Figure 3; `make_figure_area_year_summary.py` produces Figure 4; and `make_figure3_area_year.py` produces Supplementary Figure S4. Figure 3a displays relative percentage differences in citation shares; the source table retains log2 ratios and intervals. Figure 4 displays percentage changes calculated from the stored log-ratio estimates and intervals. Neither transformation re-estimates a model.
 
 ## Source data
 
 | File | Used in |
 |---|---|
 | `SourceData_Figure2.csv` | Primary adjusted means and contrasts (3,818,173 papers, 20,203 journals); Figure 2e |
-| `SourceData_Figure2_Years.csv` | Contrast by publication year; Results: publication years and research areas |
+| `SourceData_Figure2_Years.csv` | Contrast by publication year; Figure 4b |
 | `SourceData_Figure2_CloudLeaves.csv`, `SourceData_Figure2_CloudAreas.csv` | Counts behind the title-content map (1,000 topics; 32 clusters); Figure 2a |
 | `SourceData_Figure2_Corridors.csv` | Eight outcome-blind journal pairs; Figure 2f, Figure S3 |
-| `SourceData_Figure3_AreaYear.csv` | Research area × publication year cells; Figure 4 |
+| `SourceData_Figure3_AreaYear.csv` | Research area × publication year cells; Supplementary Figure S4 |
+| `SourceData_Figure4_Areas.csv` | All 31 named research-area contrasts, exported unchanged from the existing subgroup analysis; Figure 4a |
 | `SourceData_Figure3_metrics.csv` | Three network summaries; Figure 3c |
 | `SourceData_Figure3_nodes.csv`, `SourceData_Figure3_edges.csv` | Node and edge tables of the citation network; kept for provenance, not read by the current scripts |
 | `SourceData_Figure4_DistanceEnrichment.csv` | Enrichment by title-content distance; Figure 3a |

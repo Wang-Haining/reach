@@ -145,7 +145,7 @@ n_excl_pos = int((excl & (est > 0)).sum()); n_outside = int(outside.sum())
 assert (n_neg, n_excl_neg, n_excl_pos) == (117, 27, 0), (n_neg, n_excl_neg, n_excl_pos)
 
 for suffix in ("pdf", "png"):
-    output = ROOT / "figures" / f"figure3_area_year.{suffix}"
+    output = ROOT / "figures" / f"supplementary_figure_s4_area_year.{suffix}"
     fig.savefig(output, dpi=300 if suffix == "png" else None)
     assert output.stat().st_size > 10_000, f"unexpectedly small output: {output}"
     print(f"wrote {output.name}: {output.stat().st_size:,} bytes")

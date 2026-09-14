@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Figure 2: the same manuscripts, two journal types, two patterns of reach.
+"""Figure 2: a common comparison population, two journal types, two patterns of reach.
 
 Top: paper-level UMAP of a 16% sample of the 7,617,662 eligible two-arm papers
 (figures/cloud_umap_points.npz), compared papers coloured by research area.
-Middle: the two journal lenses, the counterfactual pair; rain from the same cloud
-falls on both. Below: one difference graph of the 31 named research areas
+Middle: two journal lenses symbolize standardization to a common population,
+not duplicate publication of individual papers. Below: one difference graph of the 31 named research areas
 (narrower-scope minus broader-scope standardized citation shares: node rings =
 within-area cells, arcs = between-area backbone cells), the per-area bar strip,
 the primary AIPW numbers, and one outcome-blind journal pair as an example.
@@ -30,7 +30,7 @@ from matplotlib.path import Path as MPath
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "source_data"
 BLUE, RED, INK = "#2E5C9E", "#B23A2A", "#222222"
-plt.rcParams.update({"font.family": ["Arial", "Liberation Sans"], "font.size": 7,
+plt.rcParams.update({"font.family": "Arial", "font.size": 7,
                      "pdf.fonttype": 42, "ps.fonttype": 42, "axes.linewidth": 0.6})
 rng = np.random.default_rng(20260902)
 
@@ -104,7 +104,7 @@ for m in order[:16]:
             fontweight="bold", path_effects=[pe.withStroke(linewidth=1.6, foreground="white", alpha=0.85)])
 
 ax.text(0.008, 0.992, "a", fontsize=10, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
-ax.text(0.03, 0.985, "The same manuscripts…", fontsize=9, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
+ax.text(0.03, 0.985, "A common comparison population", fontsize=9, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
 ax.text(0.03, 0.964, "7.62 million eligible articles, 2015–2020, on a title-content map.\n"
         "3.83 million compared papers colored by research area; 3.79 million outside common support in gray.",
         fontsize=5.6, ha="left", va="top", color="#555555", zorder=10)
@@ -225,7 +225,7 @@ for m in order[:10]:
             path_effects=[pe.withStroke(linewidth=1.4, foreground="white", alpha=0.9)])
 
 ax.text(0.008, GY1 + 0.010, "c", fontsize=10, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
-ax.text(0.03, GY1 + 0.002, "Where the two journal types carried\nthe same citations differently", ha="left", va="top",
+ax.text(0.03, GY1 + 0.002, "How citation origins differed\nbetween the two journal groups", ha="left", va="top",
         fontsize=7, fontweight="bold", color=INK, zorder=10, linespacing=1.25,
         path_effects=[pe.withStroke(linewidth=2.5, foreground="white")])
 n_ring_red = sum(1 for m in NAMED if diff[(m, m)] > 0)
@@ -310,7 +310,7 @@ for px in (VX0, VX1):
 ax.add_patch(plt.Rectangle((VX0 - 0.008, VY0 - 0.004), VX1 - VX0 + 0.016, VY1 - VY0 + 0.004, fc="none", ec="#AAAAAA",
                            lw=0.6, ls=(0, (3, 2)), zorder=2))
 ax.text(VX0 - 0.002, VY1 - 0.003, "f", fontsize=10, fontweight="bold", ha="left", va="top", color=INK, zorder=10)
-ax.text(VX0 + 0.02, VY1 - 0.010, f"An example: {labels[SRC]}", fontsize=6.4, fontweight="bold", color=INK, va="top")
+ax.text(VX0 + 0.02, VY1 - 0.010, f"{labels[SRC]} overall", fontsize=6.4, fontweight="bold", color=INK, va="top")
 
 targets = sorted((t for t in range(32) if t != SRC), key=lambda t: -share["broad"][(SRC, t)])
 rmax_share = max(share[g][(SRC, t)] for g in share for t in targets)
@@ -341,12 +341,12 @@ rw = ROSE_H * FIG_H / FIG_W
 stay = {"narrow": rose([VX1 - 0.008 - rw, VY0 - 0.010, rw, ROSE_H], "narrow", outline="broad")}
 stay["broad"] = share["broad"][(SRC, SRC)] / sum(share["broad"][(SRC, t)] for t in range(32))
 tx = VX0
-ax.text(tx, VY1 - 0.030, f"{case['narrow_name']} (narrower-scope, score {float(case['narrow_scope']):.2f})",
+ax.text(tx, VY1 - 0.030, f"Scope examples only: {case['narrow_name']} ({float(case['narrow_scope']):.2f})",
         ha="left", va="top", fontsize=5.4, color=RED, fontweight="bold")
-ax.text(tx, VY1 - 0.045, f"vs {case['broad_name']} (broader-scope, score {float(case['broad_scope']):.2f})",
+ax.text(tx, VY1 - 0.045, f"and {case['broad_name']} ({float(case['broad_scope']):.2f})",
         ha="left", va="top", fontsize=5.4, color=BLUE, fontweight="bold")
 rb = float(case["far_near_broad"]); rn = float(case["far_near_specialized"])
-ax.text(tx, VY1 - 0.068, f"{stay['narrow']:.0%} of citations stayed in the area under narrower-scope\n"
+ax.text(tx, VY1 - 0.068, f"Across all journals in this area: {stay['narrow']:.0%} stayed under narrower-scope\n"
         f"publication, {stay['broad']:.0%} under broader-scope;\n{rn:.2f} vs {rb:.2f} other-area citations per same-topic citation.",
         ha="left", va="top", fontsize=5.4, color=INK, linespacing=1.35)
 ax.text(tx, VY1 - 0.112, "Wedges: share of the area's citations from each other\nresearch area under narrower-scope publication;\ndashed outline, the broader-scope value.",

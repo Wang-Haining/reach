@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figure 4: the citation network of the same manuscripts is more locally concentrated
+"""Figure 4: citation origins in a common comparison population are more locally concentrated
 under narrower-scope publication, and the concentration grows with distance.
 
 a  enrichment of citation flow by title-content distance (1,000 leaf topics)
@@ -39,36 +39,39 @@ assert len(enrich) == 17 and len(edges) == 1024 and len(nodes) == 32 and len(lod
 
 fig = plt.figure(figsize=(7.0, 5.8))
 gs = fig.add_gridspec(2, 2, width_ratios=[1.05, 1], height_ratios=[1.35, 0.85], wspace=0.30, hspace=0.38,
-                      left=0.08, right=0.93, top=0.93, bottom=0.08)
+                      left=0.105, right=0.93, top=0.93, bottom=0.08)
 ax_a = fig.add_subplot(gs[0, 0]); ax_b = fig.add_subplot(gs[0, 1]); ax_c = fig.add_subplot(gs[1, :])
 
 # ---------------------------------------------------------------- a: enrichment by distance
 same = enrich[0]
 rest = enrich[1:]
 mid = np.array([(float(r["distance_lo"]) + float(r["distance_hi"])) / 2 for r in rest])
-mid[-1] = float(rest[-1]["distance_lo"]) + 0.5 * (float(rest[-1]["distance_lo"]) - float(rest[-2]["distance_lo"]))
-y = np.array([float(r["log2_ratio_narrow_over_broad"]) for r in rest])
-lo = np.array([float(r["ci_low"]) for r in rest]); hi = np.array([float(r["ci_high"]) for r in rest])
+y = 100 * np.expm1(np.log(2) * np.array([float(r["log2_ratio_narrow_over_broad"]) for r in rest]))
+lo = 100 * np.expm1(np.log(2) * np.array([float(r["ci_low"]) for r in rest]))
+hi = 100 * np.expm1(np.log(2) * np.array([float(r["ci_high"]) for r in rest]))
+assert np.allclose(y, [100 * (float(r["share_narrow"]) / float(r["share_broad"]) - 1) for r in rest])
 ax_a.axhline(0, color=INK, lw=0.6)
-ax_a.axhspan(0, 0.5, color=RED, alpha=0.05, lw=0); ax_a.axhspan(-0.5, 0, color=BLUE, alpha=0.05, lw=0)
+ax_a.axhspan(0, 40, color=RED, alpha=0.05, lw=0); ax_a.axhspan(-30, 0, color=BLUE, alpha=0.05, lw=0)
 ax_a.fill_between(mid, lo, hi, color=GREY, alpha=0.25, lw=0)
 ax_a.plot(mid, y, color=INK, lw=1.0)
 ax_a.scatter(mid, y, s=[14 + 26 * (int(r["raw_edges_broad"]) + int(r["raw_edges_narrow"])) /
                         max(int(q["raw_edges_broad"]) + int(q["raw_edges_narrow"]) for q in rest) for r in rest],
              c=[RED if v > 0 else BLUE for v in y], edgecolor="white", lw=0.5, zorder=5)
 # same-topic point at x = 0, drawn as a separate marker
-ys = float(same["log2_ratio_narrow_over_broad"])
-ax_a.errorbar(0, ys, yerr=[[ys - float(same["ci_low"])], [float(same["ci_high"]) - ys]], fmt="D", color=RED,
+ys, sl, sh = [100 * np.expm1(np.log(2) * float(same[k])) for k in ("log2_ratio_narrow_over_broad", "ci_low", "ci_high")]
+ax_a.errorbar(0, ys, yerr=[[ys - sl], [sh - ys]], fmt="D", color=RED,
               ms=4.5, capsize=2, lw=0.8, zorder=6, markeredgecolor="white", markeredgewidth=0.5)
-ax_a.text(0.004, ys + 0.03, "same\ntopic", fontsize=5.6, color=RED, ha="left", va="bottom")
-ax_a.set_xlim(-0.012, 0.335); ax_a.set_ylim(-0.42, 0.46)
+ax_a.text(0.004, ys + 2, "same\ntopic", fontsize=5.6, color=RED, ha="left", va="bottom")
+ax_a.set_xlim(-0.012, mid.max() * 1.05); ax_a.set_ylim(-25, 38)
+from matplotlib.ticker import PercentFormatter
+ax_a.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=0))
 ax_a.set_xlabel("Title-content distance between the paper's topic and the citing paper's topic\n"
                 "(cosine distance between leaf-topic centers; 16 bins of equal citation weight)", fontsize=6.2)
-ax_a.set_ylabel("log$_2$ (narrower-scope share ÷ broader-scope share)", fontsize=6.4)
-ax_a.text(0.33, 0.40, "citations enriched under\nnarrower-scope journals", ha="right", va="top", fontsize=5.8, color=RED)
-ax_a.text(0.33, -0.36, "citations depleted under\nnarrower-scope journals", ha="right", va="bottom", fontsize=5.8, color=BLUE)
+ax_a.set_ylabel("Relative difference in citation share (%)\n(narrower-scope versus broader-scope)", fontsize=6.4)
+ax_a.text(0.49, 34, "Larger share from\nnearby topics", ha="right", va="top", fontsize=5.8, color=INK)
+ax_a.text(0.49, -23, "Smaller share from\nmore distant topics", ha="right", va="bottom", fontsize=5.8, color=INK)
 ax_a.spines[["top", "right"]].set_visible(False)
-ax_a.set_title("Concentration grows with distance from the paper's topic", loc="left", fontsize=7.5)
+ax_a.set_title("Citation shares shift toward nearby topics", loc="left", fontsize=7.5)
 ax_a.tick_params(labelsize=6)
 
 # ---------------------------------------------------------------- b: difference matrix
@@ -89,7 +92,7 @@ cb = fig.colorbar(im, ax=ax_b, fraction=0.045, pad=0.03, extend="both", ticks=[-
 cb.ax.set_yticklabels([f"{v:+.2f}" for v in (-lim, -lim / 2, 0, lim / 2, lim)])
 cb.ax.tick_params(labelsize=5.5)
 cb.set_label("Standardized share, narrower minus broader (×100)", fontsize=6)
-ax_b.set_title("Same-area cells gain, other-area cells lose", loc="left", fontsize=7.5)
+ax_b.set_title("Larger within-area shares, smaller between-area shares", loc="left", fontsize=7.0)
 
 # ---------------------------------------------------------------- c: metrics + LODO
 names = {"directed_modularity": ("Within-area concentration\n(directed modularity)", 1),

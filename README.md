@@ -1,6 +1,6 @@
 # reach
 
-Data and figure code for the manuscript *Journal scope and the reach of scientific work*, submitted to *Quantitative Science Studies*.
+Data and figure code for the manuscript *Journal scope and the reach of scientific work*.
 
 Every number printed in the manuscript and its Supplementary Information is computed from the aggregate tables in `source_data/`. Paper-level records are not redistributed; they derive from the OpenAlex snapshot of 26 June 2026 and, for one supplementary analysis, SciSciNet v2.
 

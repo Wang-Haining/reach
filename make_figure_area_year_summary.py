@@ -73,6 +73,23 @@ cmap = plt.get_cmap("RdBu").copy()  # Red: lower ratio; blue: higher ratio.
 cmap.set_bad("#D9D9D9")
 im = ax_heat.imshow(np.ma.masked_invalid(matrix), cmap=cmap, vmin=-80, vmax=80,
                     aspect="auto", interpolation="nearest")
+marked = []
+for i, j in np.argwhere(np.isfinite(matrix)):
+    row = lookup[int(areas[i]["level"]), int(years[j]["level"])]
+    q = float(row["q_value_bh"])
+    assert np.isfinite(q) and 0 <= q <= 1, row
+    value = round(matrix[i, j])
+    label = f"{value:+d}" if value else "0"
+    if q < 0.05:
+        label += "*"
+        marked.append((row["display_label"], row["publication_year"]))
+    rgb = np.array(cmap(im.norm(matrix[i, j]))[:3])
+    linear = np.where(rgb <= 0.04045, rgb / 12.92, ((rgb + 0.055) / 1.055) ** 2.4)
+    luminance = linear @ [0.2126, 0.7152, 0.0722]
+    color = "black" if luminance > 0.179 else "white"
+    assert max((luminance + 0.05) / 0.05, 1.05 / (luminance + 0.05)) >= 4.5
+    ax_heat.text(j, i, label, ha="center", va="center", fontsize=5.4, color=color)
+assert marked == [("Orthopaedics & sports medicine", "2019")], marked
 for i, j in np.argwhere(np.isnan(matrix)):
     ax_heat.text(j, i, "x", ha="center", va="center", fontsize=5, color="#666666")
 ax_heat.set(xticks=np.arange(6), xticklabels=[r["level"] for r in years], xlim=(-0.5, 5.5))
@@ -88,13 +105,17 @@ bar = fig.colorbar(im, cax=cax, orientation="horizontal", ticks=[-80, -40, 0, 40
 bar.ax.tick_params(labelsize=5, length=2, pad=2)
 bar.outline.set_linewidth(0.4)
 fig.text(0.30, 0.225, "Heatmap: relative difference in citation ratio", fontsize=5.6)
-fig.text(0.30, 0.15, "Gray x: not estimated", fontsize=5.7, color=GREY)
+fig.text(0.30, 0.14, "Cell labels: rounded percentages\n* q < 0.05 (BH-adjusted); gray x: not estimated", fontsize=5.4, linespacing=1.4)
 fig.text(0.30, 0.095, "27 of 31 areas and all six years\nhad lower estimated ratios.", fontsize=7, linespacing=1.45)
 fig.text(0.265, 0.958, "a", fontsize=8, fontweight="bold")
 fig.text(0.59, 0.958, "b", fontsize=8, fontweight="bold")
 fig.text(0.59, 0.237, "c", fontsize=8, fontweight="bold")
 fig.text(0.30, 0.028, "Ratio: other-area / same-topic citations. Negative values: lower in narrower-scope journals.", fontsize=5.6)
 fig.canvas.draw()
+assert len(ax_heat.texts) == 186
+for label in ax_heat.texts:
+    box = label.get_window_extent(fig.canvas.get_renderer())
+    assert box.width < ax_heat.bbox.width / 6 and box.height < ax_heat.bbox.height / 31
 assert np.allclose(ax_area.transData.transform([(0, i) for i in range(31)])[:, 1],
                    ax_heat.transData.transform([(0, i) for i in range(31)])[:, 1]), "area rows are not aligned"
 assert np.allclose(ax_heat.transData.transform([(i, 0) for i in range(6)])[:, 0],
@@ -104,4 +125,4 @@ for suffix in ("pdf", "png"):
     fig.savefig(out, dpi=300 if suffix == "png" else None)
     assert out.stat().st_size > 10_000, out
     print(f"wrote {out.name}: {out.stat().st_size:,} bytes")
-print("validated aligned 31 areas (27 negative), 6 years (6 negative), 158 estimated cells (117 negative), 28 missing cells; n=3,827,491; saved estimates unchanged")
+print("validated aligned 31 areas (27 negative), 6 years (6 negative), 158 numeric labels (117 negative estimates), 1 existing BH marker, 28 missing cells; n=3,827,491; saved estimates unchanged")

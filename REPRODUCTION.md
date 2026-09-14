@@ -17,6 +17,8 @@ python make_supplementary_tables.py
 
 Figure 1 (study design) is drawn by hand and has no script. Filenames retain earlier numbering: `make_figure4_network.py` produces manuscript Figure 3; `make_figure_area_year_summary.py` produces Figure 4; and `make_figure3_area_year.py` produces Supplementary Figure S4. Figure 3a displays relative percentage differences in citation shares; the source table retains log2 ratios and intervals. Figure 4 aligns the 31-area forest with a 31-by-6 heatmap and a year summary below. All three panels use percentage changes calculated from stored log-ratio estimates and intervals. Heatmap color encodes the estimate without significance-dependent fading; 28 non-estimable cells are gray. Area and year estimates pool papers, not heatmap cells. The precision funnel remains in Supplementary Figure S4. No model is re-estimated.
 
+Heatmap labels are percentage changes rounded to whole numbers. The asterisk marks an existing Benjamini--Hochberg-adjusted q value below 0.05; the correction covers all 164 estimable area-year cells, including six Mixed records cells omitted from the display. The marked cell is Orthopaedics & sports medicine in 2019 (q = 0.0111). No p or q values are recomputed for the figure.
+
 ## Source data
 
 | File | Used in |

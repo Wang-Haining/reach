@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Figure 4: citation origins in a common comparison population are more locally concentrated
-under narrower-scope publication, and the concentration grows with distance.
+under narrower-scope publication.
 
 a  enrichment of citation flow by title-content distance (1,000 leaf topics)
 b  32 x 32 standardized-share difference matrix, areas ordered along the map
@@ -66,7 +66,7 @@ ax_a.set_xlim(-0.012, mid.max() * 1.05); ax_a.set_ylim(-25, 38)
 from matplotlib.ticker import PercentFormatter
 ax_a.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=0))
 ax_a.set_xlabel("Title-content distance between the paper's topic and the citing paper's topic\n"
-                "(cosine distance between leaf-topic centers; 16 bins of equal citation weight)", fontsize=6.2)
+                "(cosine distance; 16 bins from pooled, unweighted distance quantiles)", fontsize=6.2)
 ax_a.set_ylabel("Relative difference in citation share (%)\n(narrower-scope versus broader-scope)", fontsize=6.4)
 ax_a.text(0.49, 34, "Larger share from\nnearby topics", ha="right", va="top", fontsize=5.8, color=INK)
 ax_a.text(0.49, -23, "Smaller share from\nmore distant topics", ha="right", va="bottom", fontsize=5.8, color=INK)

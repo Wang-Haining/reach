@@ -24,6 +24,7 @@ Heatmap labels are percentage changes rounded to whole numbers. The asterisk mar
 | File | Used in |
 |---|---|
 | `SourceData_Figure2.csv` | Primary adjusted means and contrasts (3,818,173 papers, 20,203 journals); Figure 2e |
+| `SourceData_Decomposition.csv` | Completed follow-up estimates; populations, units, missing-interval semantics, and row selection are documented in the README. Existing rendered figures are unchanged. |
 | `SourceData_Figure2_Years.csv` | Contrast by publication year; Figure 4c |
 | `SourceData_Figure2_CloudLeaves.csv`, `SourceData_Figure2_CloudAreas.csv` | Counts behind the title-content map (1,000 topics; 32 clusters); Figure 2a |
 | `SourceData_Figure2_Corridors.csv` | Eight outcome-blind journal pairs; Figure 2f, Figure S3 |

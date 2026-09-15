@@ -1,0 +1,7 @@
+claim,value,unit,population,origin,derivation
+complete_comparison_sets,5872,sets,3827491 downstream papers,results/reach_followup_v2/within_set_summary.csv#eligible_sets,5872 eligible sets of 5872 total; coverage 1.0 for both correlations
+scope_volume_within_set_rho,-0.04068635867596675,Spearman rho,3827491 downstream papers,results/reach_followup_v2/within_set_summary.csv#history_n,Mean within-set Spearman weighted by set paper count; not IPW
+scope_prestige_within_set_rho,0.08339060499968273,Spearman rho,3827491 downstream papers,results/reach_followup_v2/within_set_summary.csv#prior_prestige,Mean within-set Spearman weighted by set paper count; not IPW
+unique_citation_links,74432171,links,7617662 eligible papers before citation exclusions and common support,artifacts/v3/run_prepare.json#counts.citation_edges@b5009bf32cd67e5835bd80a635044998bc5de983,Stored prepare count; no recount or estimation
+unique_citing_papers,18788419,papers,7617662 eligible papers before citation exclusions and common support,artifacts/v3/run_prepare.json#counts.citing_metadata@b5009bf32cd67e5835bd80a635044998bc5de983,Stored prepare count; no recount or estimation
+reference_ratio_change_percent,-4.302225240047779,percent,3818173 primary papers,SourceData_Figure4_estimates.csv#overall/primary/Published-reference distribution,100 * expm1(estimate); original log ratio -0.0439751400466237

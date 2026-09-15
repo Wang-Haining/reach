@@ -1,12 +1,16 @@
 # reach
 
-Data and figure code for the manuscript *Journal scope and the reach of scientific work*.
+Data and figure code for *Journal scope tracks where scientific work is later used*.
 
 This repository contains aggregate results and code for drawing the figures and generating the tables. Paper-level records and the upstream analysis pipeline are not included; the analyses use the OpenAlex snapshot of 26 June 2026 and, for one supplementary analysis, SciSciNet v2.
 
 ## Reproduction
 
-Python 3.11 or later with `numpy` and `matplotlib`. See [REPRODUCTION.md](REPRODUCTION.md) for the file inventory and the commands that regenerate each figure and table.
+Python 3.11 or later with `numpy`, `matplotlib`, and `scipy`. SciPy supplies the pooled-profile clustering used to order the Figure 2 matrix. See [REPRODUCTION.md](REPRODUCTION.md) for the current display-to-file mapping and commands.
+
+[Source_Data.zip](Source_Data.zip) contains one CSV for each of Figures 1–4 and Supplementary Figures S1–S6. Each contains the values plotted in that item, with panel and source-file identifiers. Figure 1 is an author-drawn schematic, so its CSV has a header but no empirical rows. The archive follows the current display numbering without renaming any frozen input CSV. `export_display_data.py` rebuilds it without fitting models. Run `python validate_manuscript.py --source-only` to check this public release; the default manuscript-text checks require the separate writing repository.
+
+`SourceData_ReportedFacts.csv` records the six numerical values behind the comparison-set coverage and correlations, citation-link and citing-paper counts, and the reference-side ratio. Origin paths use neutral release aliases such as `results/v3/`; they identify the original analysis artifact, not an included directory or a changed analysis.
 
 ## Follow-up source data
 
@@ -14,7 +18,7 @@ Python 3.11 or later with `numpy` and `matplotlib`. See [REPRODUCTION.md](REPROD
 |---|---|
 | `source_data/SourceData_Decomposition.csv` | 123 aggregate rows: cross-area citation decomposition, other-area counts, ten modifier tests, scope-separation contrasts, within-comparison-set correlations, a 2015 ten-year preview, and a two-hop trial |
 
-This table adds completed follow-up results; it does not replace the primary estimate in `SourceData_Figure2.csv` (3,818,173 papers from 20,203 journals). No models were fitted for this export. The existing figures have not been changed to incorporate it.
+This table adds completed follow-up results; it does not replace the primary estimate in `SourceData_Figure2.csv` (3,818,173 papers from 20,203 journals). No models were fitted for this export. Current Figure 3a–b and Figure 4c use selected rows from this table.
 
 Select rows by **`analysis`, `outcome`, and `scale` together**, not by outcome alone. `mean_specialized` denotes the narrower-scope group. Every row identifies its originating aggregate file in `origin`; these paths identify internal analysis artifacts, not files included in this public repository.
 

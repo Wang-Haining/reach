@@ -1,13 +1,13 @@
 diagnostic,group,value,unit,source
 title_audit_sample,all,200,titles,fixed hash-ordered sample from deterministic comparison population
 explicit_record_type_signal,all,83,titles,transparent title-phrase audit
-deterministic_comparison_population,all,3827491,papers,qss_v3/routing_scores.parquet
-mixed_cluster_population,all,152090,papers,qss_v3/routing_scores.parquet
-mixed_cluster_share,all,0.039736213618791,proportion,qss_v3/routing_scores.parquet
-mixed_cluster_share,broader,0.0458875028241819,proportion,qss_v3/routing_scores.parquet
-mixed_cluster_share,narrower,0.0356136719077275,proportion,qss_v3/routing_scores.parquet
-deterministic_theta,all_clusters,-0.0824527034864642,log ratio-of-ratios,qss_v3/routing_scores.parquet
-deterministic_theta,mixed_cluster_masked,-0.0841266175603677,log ratio-of-ratios,qss_v3/routing_scores.parquet
+deterministic_comparison_population,all,3827491,papers,v3/routing_scores.parquet
+mixed_cluster_population,all,152090,papers,v3/routing_scores.parquet
+mixed_cluster_share,all,0.039736213618791,proportion,v3/routing_scores.parquet
+mixed_cluster_share,broader,0.0458875028241819,proportion,v3/routing_scores.parquet
+mixed_cluster_share,narrower,0.0356136719077275,proportion,v3/routing_scores.parquet
+deterministic_theta,all_clusters,-0.0824527034864642,log ratio-of-ratios,v3/routing_scores.parquet
+deterministic_theta,mixed_cluster_masked,-0.0841266175603677,log ratio-of-ratios,v3/routing_scores.parquet
 mixed_destination_ipw_share,broader,0.00342394514062369,proportion,SourceData_ED3_network_edges.csv
 mixed_destination_ipw_share,narrower,0.00298414352292054,proportion,SourceData_ED3_network_edges.csv
 directed_modularity_contrast,all_sources,0.028791822887511,absolute difference,SourceData_Figure3_metrics.csv

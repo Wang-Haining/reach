@@ -1,17 +1,17 @@
 panel,item,statistic,value,origin
-c,Primary,estimate,-0.096748438961938,results/qss_v3/dirty_estimates.csv
-c,Primary,ci_low,-0.144336408333361,results/qss_v3/dirty_estimates.csv
-c,Primary,ci_high,-0.0491604695905151,results/qss_v3/dirty_estimates.csv
-c,Primary,bootstrap_ci_low,-0.142620615483123,results/qss_v3/dirty_estimates.csv
-c,Primary,bootstrap_ci_high,-0.0434718084830423,results/qss_v3/dirty_estimates.csv
-c,99.9% winsorized,estimate,-0.0917645392775518,results/qss_v3/dirty_estimates.csv
-c,99.9% winsorized,ci_low,-0.1282981682733862,results/qss_v3/dirty_estimates.csv
-c,99.9% winsorized,ci_high,-0.0552309102817173,results/qss_v3/dirty_estimates.csv
-c,99.9% winsorized,bootstrap_ci_low,-0.1286392926499515,results/qss_v3/dirty_estimates.csv
-c,99.9% winsorized,bootstrap_ci_high,-0.0522248174999959,results/qss_v3/dirty_estimates.csv
-d,Frozen primary,estimate,-0.096748438961938,results/qss_v3/dirty_estimates.csv
-d,Frozen primary,ci_low,-0.144336408333361,results/qss_v3/dirty_estimates.csv
-d,Frozen primary,ci_high,-0.0491604695905151,results/qss_v3/dirty_estimates.csv
-d,Deterministic rerun,estimate,-0.0824527034864641,results/qss_v3/round2_score_diagnostics.csv
-d,Deterministic rerun,ci_low,-0.1282409125520956,results/qss_v3/round2_score_diagnostics.csv
-d,Deterministic rerun,ci_high,-0.0366644944208327,results/qss_v3/round2_score_diagnostics.csv
+c,Primary,estimate,-0.096748438961938,results/v3/dirty_estimates.csv
+c,Primary,ci_low,-0.144336408333361,results/v3/dirty_estimates.csv
+c,Primary,ci_high,-0.0491604695905151,results/v3/dirty_estimates.csv
+c,Primary,bootstrap_ci_low,-0.142620615483123,results/v3/dirty_estimates.csv
+c,Primary,bootstrap_ci_high,-0.0434718084830423,results/v3/dirty_estimates.csv
+c,99.9% winsorized,estimate,-0.0917645392775518,results/v3/dirty_estimates.csv
+c,99.9% winsorized,ci_low,-0.1282981682733862,results/v3/dirty_estimates.csv
+c,99.9% winsorized,ci_high,-0.0552309102817173,results/v3/dirty_estimates.csv
+c,99.9% winsorized,bootstrap_ci_low,-0.1286392926499515,results/v3/dirty_estimates.csv
+c,99.9% winsorized,bootstrap_ci_high,-0.0522248174999959,results/v3/dirty_estimates.csv
+d,Frozen primary,estimate,-0.096748438961938,results/v3/dirty_estimates.csv
+d,Frozen primary,ci_low,-0.144336408333361,results/v3/dirty_estimates.csv
+d,Frozen primary,ci_high,-0.0491604695905151,results/v3/dirty_estimates.csv
+d,Deterministic rerun,estimate,-0.0824527034864641,results/v3/round2_score_diagnostics.csv
+d,Deterministic rerun,ci_low,-0.1282409125520956,results/v3/round2_score_diagnostics.csv
+d,Deterministic rerun,ci_high,-0.0366644944208327,results/v3/round2_score_diagnostics.csv

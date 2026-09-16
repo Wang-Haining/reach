@@ -94,15 +94,14 @@ for r in read("SourceData_Figure4_DistanceEnrichment.csv"):
         raw_edges=int(r["raw_edges_broad"]) + int(r["raw_edges_narrow"]), unit="percent")
 metrics = {r["metric"]: r for r in read("SourceData_Figure3_metrics.csv")}
 for key, r in metrics.items():
-    scale = 100 / float(r["broad"])
     add("Figure 3", "d", "SourceData_Figure3_metrics.csv", metric=key,
-        estimate=float(r["contrast_specialized_minus_broad"]) * scale,
-        ci_low=float(r["ci_low"]) * scale, ci_high=float(r["ci_high"]) * scale,
-        unit="percent; absolute-difference interval scaled by saved broad mean")
+        estimate=float(r["contrast_specialized_minus_broad"]),
+        ci_low=float(r["ci_low"]), ci_high=float(r["ci_high"]),
+        unit="absolute difference in graph metric")
 for r in read("SourceData_ED3_lodo.csv"):
     add("Figure 3", "d leave-one-area-out", "SourceData_ED3_lodo.csv", metric=r["metric"],
         omitted_area=r["omitted_source_domain"],
-        estimate=float(r["contrast_specialized_minus_broad"]) * 100 / float(metrics[r["metric"]]["broad"]), unit="percent; full-network broad denominator")
+        estimate=float(r["contrast_specialized_minus_broad"]), unit="absolute difference in graph metric")
 
 cells = [r for r in read("SourceData_Figure3_AreaYear.csv") if r["qwen_macro"] != "18"]
 shown = {r["qwen_macro"] for r in cells if r["status"] == "estimated"}

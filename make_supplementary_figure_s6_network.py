@@ -4,8 +4,8 @@
 Nodes are the 31 named research areas at their positions on the title-content map of
 Supplementary Figure S5. A node's ring is the difference, narrower minus broader, in the share
 of its citations that stayed inside the area. Arcs are the between-area flows that together
-carry half of all between-area citations, chosen without journal-group labels. Every named
-area is labelled. Figure 2a shows the same quantities cell by cell.
+were selected by pooled flow before omitting Mixed records, without journal-group labels.
+Every named area is labelled. Figure 2b shows the same quantities cell by cell.
 """
 import csv
 from pathlib import Path

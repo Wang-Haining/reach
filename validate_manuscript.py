@@ -333,8 +333,8 @@ if order != sorted(order):
     raise ValueError(f"incorrect section order: {order}")
 result_order = [main.index(heading) for heading in
                 ("\\subsection{Papers in narrower-scope journals reached",
-                 "\\subsection{What fell was how much other research areas drew",
-                 "\\subsection{The same direction appeared in most research areas",
+                 "\\subsection{The largest shortfall was in how heavily other research areas drew",
+                 "\\subsection{The direction was widespread and persisted into years six to ten}",
                  "\\subsection{Where the claim stops}")]
 if result_order != sorted(result_order):
     raise ValueError(f"incorrect Results order: {result_order}")
@@ -378,11 +378,19 @@ for text, snippets in ((main, required_main), (supp, required_supp)):
             raise ValueError(f"missing required manuscript text: {snippet!r}")
 
 for forbidden in ("Extended Data", "fixed-support IPW", "citation_dynamics",
-                  "depended on adjustment", "prespecified", "DuckDB hash",
+                  "depended on adjustment", "prespecified", "pre-specified", "DuckDB hash",
+                  "deepened with distance", "deepening as the distance grows",
+                  "had not faded", "no catch-up", "classical multidimensional scaling",
                   "Editorial & miscellaneous", "editorial and miscellaneous",
                   "text map", "text model"):
-    if forbidden.lower() in (main + supp + str(manifest)).lower():
+    if forbidden.lower() in (main + supp + "".join(tables.values()) + str(manifest)).lower():
         raise ValueError(f"forbidden content remains: {forbidden}")
+for text, snippet in ((main, "1.9\\% to 20.7\\% lower"),
+                      (main, "Absolute differences, narrower minus broader scope"),
+                      (supp, "displays 420,000 papers"), (supp, "Figure~2b"),
+                      (supp, "49.3\\% of flow between")):
+    if snippet not in text:
+        raise ValueError(f"display correction missing: {snippet}")
 if re.search(r"SHA-?256|BLAKE2|checksum|DuckDB|list\\_distinct", main + supp, re.I):
     raise ValueError("engineering identifiers belong in the repository, not the manuscript or SI")
 for name, text in (("main", main), ("supplement", supp), *tables.items()):

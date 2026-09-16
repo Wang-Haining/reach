@@ -2,7 +2,7 @@
 """Supplementary Tables S4 and S5, built from source_data/SourceData_Decomposition.csv.
 
 S4: the three measures of reach and their decomposition, under three adjustment methods.
-S5: the ten pre-specified effect modifiers with unadjusted and Benjamini-Hochberg q values.
+S5: the ten effect modifiers with unadjusted and Benjamini-Hochberg q values.
 """
 import csv
 import math
@@ -48,12 +48,13 @@ saved propensity weights alone; outcome-model estimates standardize the fitted
 journal-group-specific models to the common covariate distribution and their intervals
 condition on those fitted predictions, so they are descriptive rather than a claim of greater
 precision; augmented estimates combine both and are the values reported in the main text. The
-final row is a conditional mean and compares the papers that received such citations under each
+fourth row is a conditional mean and compares the papers that received such citations under each
 journal group, not one fixed population. All rows use the separately regenerated comparison
-sample of 3,827,491 papers from 20,215 journals.}""",
+sample of 3,827,491 papers from 20,215 journals. The area-count measure excludes Mixed
+records; the probability and citation-count measures retain that cluster.}""",
       r"\label{tab:decomposition}", r"\footnotesize",
       r"\setlength{\tabcolsep}{5pt}",
-      r"\begin{tabular}{lrrr}", r"\toprule",
+      r"\begin{tabular}{p{0.36\textwidth}rrr}", r"\toprule",
       r"Measure & Weighted & Outcome model & Augmented \\", r"\midrule"]
 for key, label in MEASURES:
     cells = [cell(one(analysis=a, outcome=key, scale="log_mean_ratio")) for a, _ in METHODS]
@@ -83,8 +84,8 @@ LABELS = {
     "journal_prestige_quartile": "Publishing journal prior prestige",
 }
 s5 = [r"\begin{table}[H]", r"\centering",
-      r"""\caption{\textbf{Ten pre-specified effect modifiers of the primary contrast.}
-The modifier list was fixed before estimation. Each row is a global test of whether the
+      r"""\caption{\textbf{Ten effect modifiers of the primary contrast.}
+Each row is a global test of whether the
 other-area-to-same-topic citation contrast differs across groups of the modifier; $q$ values are
 Benjamini--Hochberg adjusted across all ten tests. No test showed clear differences between
 groups. Journal prior prestige is a property of the publishing venue, not a measure of author

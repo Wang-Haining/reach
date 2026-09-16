@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Supplementary Figure S5: the title-content map, shown for orientation only.
 
-The 1,219,650 display papers placed by title alone, coloured by research area, with the
+Display 420,000 of the 1,219,650 projected papers, coloured by research area, with the
 areas named where they sit. Colour is an atlas, not a scale: every area is named on the
 map, so nothing has to be looked up in a legend.
 
@@ -103,8 +103,7 @@ for m in order:
             path_effects=[pe.withStroke(linewidth=1.9, foreground="white")])
 
 fig.text(0.5, 1 - 0.055 / FIG_H,
-         f"{N:,} papers placed by title alone; color and label mark the research area "
-         f"each paper's topic belongs to",
+         f"{len(keep):,} papers shown; title content determines position, color marks research area",
          ha="center", va="top", fontsize=6.2, color="#555555")
 
 out = ROOT / "figures" / "supplementary_figure_s5_map.pdf"

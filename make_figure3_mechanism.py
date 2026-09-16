@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Figure 3: where the shortfall in reach sits.
 
-a, three measures of use outside the paper's own research area, least to most demanding.
+a, three measures of use outside the paper's own research area.
 b, the identity that splits the other-area citation count into entry and intensity.
-c, the same contrast resolved by title-content distance rather than at the area boundary.
-d, three whole-graph summaries of concentration, each as a relative change, with the 32
-   leave-one-area-out refits behind them.
+c, citation-share differences across title-content distances.
+d, three whole-graph summaries of concentration, each as an absolute difference, with the
+   32 leave-one-area-out estimates behind them.
 
 Inputs (all under source_data/):
   SourceData_Decomposition.csv              a, b
@@ -113,9 +113,9 @@ ax.set_ylabel("Difference (%)", fontsize=6.4)
 ax.set_ylim(min(pct(tot), pct(inten)) * 1.20, 4.6)
 ax.tick_params(labelsize=6)
 ax.spines[["top", "right"]].set_visible(False)
-ax.set_title("The count split exactly in two", loc="left", fontsize=7.4, pad=8)
+ax.set_title("Entry and intensity account for the shortfall", loc="left", fontsize=7.4, pad=8)
 c = get("decomp_contrast", scale="log_ratio_contrast")
-ax.text(0.5, 0.035, f"how many − whether  {pct(num(c,'estimate')):+.1f}%"
+ax.text(0.5, 0.035, f"intensity versus entry  {pct(num(c,'estimate')):+.1f}%"
                     f"  ({pct(num(c,'ci_low')):+.0f}%, {pct(num(c,'ci_high')):+.0f}%)",
         transform=ax.transAxes, ha="center", va="bottom", fontsize=5.9, color="#555555")
 
@@ -143,12 +143,12 @@ ax.set_ylim(-25, 38)
 ax.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=0))
 ax.set_xlabel("Title-content distance from the paper's topic to the citing paper's topic\n"
               "(cosine distance; 16 bins of pooled, unweighted citation distances)", fontsize=6.2)
-ax.set_ylabel("Difference in citation share (%)\nnarrower minus broader scope", fontsize=6.4)
+ax.set_ylabel("Relative difference in citation share\nnarrower versus broader scope (%)", fontsize=6.4)
 ax.text(0.485, 35, "larger share from nearby topics", ha="right", va="top", fontsize=6.0, color=RED)
 ax.text(0.485, -23, "smaller share from distant topics", ha="right", va="bottom", fontsize=6.0, color=BLUE)
 ax.tick_params(labelsize=6)
 ax.spines[["top", "right"]].set_visible(False)
-ax.set_title("The shortfall deepened with distance", loc="left", fontsize=7.4, pad=8)
+ax.set_title("Nearby shares were higher, distant shares lower", loc="left", fontsize=7.4, pad=8)
 
 # ------------------------------------------------------------------ d: whole-graph summaries --
 ax = fig.add_subplot(gs[1, 1])
@@ -157,13 +157,11 @@ NAMES = {"directed_modularity": "Concentration within\nthe research area",
          "semantic_span": "Title-content distance\ncited to citing"}
 positions = np.arange(len(metrics))[::-1]
 for pos, r in zip(positions, metrics):
-    base = float(r["broad"])
-    scale = 100.0 / base
-    d = float(r["contrast_specialized_minus_broad"]) * scale
-    dl, dh = float(r["ci_low"]) * scale, float(r["ci_high"]) * scale
-    vals = [float(x["contrast_specialized_minus_broad"]) * scale
+    d = float(r["contrast_specialized_minus_broad"])
+    dl, dh = float(r["ci_low"]), float(r["ci_high"])
+    vals = [float(x["contrast_specialized_minus_broad"])
             for x in lodo if x["metric"] == r["metric"]]
-    # A strip of the 32 leave-one-area-out refits: one tick each, no jitter.
+    # A strip of the 32 leave-one-area-out estimates: one tick each, no jitter.
     lane = pos + 0.30
     ax.plot([min(vals), max(vals)], [lane, lane], color=GREY, lw=0.4, alpha=0.5, zorder=1)
     for v in vals:
@@ -173,18 +171,19 @@ for pos, r in zip(positions, metrics):
     for edge in (dl, dh):
         ax.plot([edge, edge], [pos - .09, pos + .09], color=RED, lw=1.2, zorder=3)
     ax.scatter([d], [pos], s=28, color=RED, zorder=4)
-    ax.text(d, pos - 0.30, f"{d:+.1f}%", ha="center", va="top", fontsize=6.2, color=INK)
+    ax.text(d, pos - 0.30, f"{d:+.3f}", ha="center", va="top", fontsize=6.2, color=INK)
 ax.axvline(0, color=INK, lw=0.6, zorder=1)
 ax.set_yticks(positions)
 ax.set_yticklabels(list(NAMES.values()), fontsize=6.2, linespacing=1.25)
 ax.set_ylim(-0.55, len(metrics) - 0.25)
-ax.set_xlim(-10.5, 10.5)
-ax.set_xlabel("Relative change under narrower-scope\npublication (%)", fontsize=6.4)
+ax.set_xlim(-0.055, 0.055)
+ax.set_xticks([-0.04, -0.02, 0, 0.02, 0.04])
+ax.set_xlabel("Difference in graph metric\nnarrower minus broader scope", fontsize=6.4)
 ax.spines[["top", "right", "left"]].set_visible(False)
 ax.tick_params(axis="y", length=0)
 ax.tick_params(axis="x", labelsize=6)
 ax.set_title("The whole citation graph was more local", loc="left", fontsize=7.4, pad=8)
-ax.text(0.5, -0.40, "gray ticks: the 32 refits that each omit one research area",
+ax.text(0.5, -0.40, "gray ticks: each estimate omits one research area",
         transform=ax.transAxes, ha="center", va="top", fontsize=5.8, color=GREY)
 
 for x, ypos, lab in ((0.006, 0.975, "a"), (0.595, 0.975, "b"),
